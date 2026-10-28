@@ -13,8 +13,8 @@ Au plaisir de vous retrouver le [DATE] pour la formation **Spark 4 & Machine Lea
 Pour démarrer les travaux pratiques dès la première matinée, merci de préparer votre poste **avant le [DATE – 2 jours]**.
 Comptez une vingtaine de minutes :
 
-1. Installer **Java 17 ou 21** (JDK Temurin : https://adoptium.net), **Python 3.10+**, **Git** et **VS Code** avec les extensions Python et Jupyter.
-2. Récupérer le dépôt de la formation et installer PySpark :
+1. Installer **Java 17 ou 21** (JDK Temurin : https://adoptium.net), **Python 3.10+**, **Git** et **VS Code** (extension Scala « Metals » ; Python et Jupyter si vous choisissez l'option Python).
+2. Récupérer le dépôt de la formation et installer Spark (le paquet `pyspark` contient `spark-shell`) :
    ```
    git clone [URL_DU_DEPOT] formation-spark-ml
    cd formation-spark-ml
@@ -31,7 +31,7 @@ de `check_env.py` : nous vous fournirons un environnement de secours prêt à l'
 
 Matériel : 8 Go de RAM minimum, 5 Go de disque libre, accès à pypi.org et github.com.
 
-Les TP sont en **Python (PySpark)**. Une connaissance de base de Python, d'un terminal Unix et de Git est attendue.
+Les TP sont en **Scala** (dans `spark-shell`, sans compilation ni sbt), avec une version **Python** en option pour qui le préfère. Une connaissance de base d'un langage de programmation (Scala, Java ou Python), d'un terminal Unix et de Git est attendue.
 
 À très bientôt,
 

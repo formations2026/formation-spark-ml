@@ -1,8 +1,8 @@
 #!/usr/bin/env python3
 """
-Construit les notebooks du jour 1 :
-  - jour1/TPx_*.ipynb, jour2/TPx_*.ipynb          : énoncés (cellules à compléter)
-  - jour1/corriges/*.ipynb, jour2/corriges/*.ipynb : corrigés, générés depuis les scripts .py (cellules séparées par `# %%`)
+Construit les notebooks Python (option Python des TP ; la version par défaut est en Scala) :
+  - jourN/python/TPx_*.ipynb          : énoncés (cellules à compléter)
+  - jourN/python/corriges/*.ipynb     : corrigés, générés depuis les scripts .py (cellules séparées par `# %%`)
 
     python scripts/build_notebooks.py
 """
@@ -11,8 +11,8 @@ import nbformat as nbf
 from pathlib import Path
 
 ROOT = Path(__file__).resolve().parent.parent
-J1 = ROOT / "jour1"
-J2 = ROOT / "jour2"
+J1 = ROOT / "jour1" / "python"
+J2 = ROOT / "jour2" / "python"
 
 
 def md(t):
@@ -370,7 +370,7 @@ write(J2 / "corriges" / "TP8_clustering.ipynb", corrige_from_py(J2 / "corriges" 
 
 
 # =============================================================== JOUR 3
-J3 = ROOT / "jour3"
+J3 = ROOT / "jour3" / "python"
 SESSION_STREAM = '''
 from pyspark.sql import SparkSession, functions as F
 spark = SparkSession.builder.appName("TP").master("local[*]").getOrCreate()

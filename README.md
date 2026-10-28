@@ -22,7 +22,22 @@ pip install -r requirements.txt
 python scripts/check_env.py                              # Java 17+, PySpark 4, Jupyter, Git, SparkSession
 ```
 
-Puis ouvrez `jour1/TP1_premier_contact.ipynb` dans VS Code (extension Jupyter), **depuis la racine du dépôt**.
+Puis, **depuis la racine du dépôt**, ouvrez `jour1/TP1_premier_contact.scala` dans VS Code et `spark-shell` dans un terminal :
+
+```bash
+spark-shell                                   # Scala 2.13, Spark 4 : `spark` et `sc` sont prêts
+scala> :load jour1/TP1_premier_contact.scala  # ou collez les étapes une à une (:paste puis Ctrl+D)
+```
+
+`spark-shell` est installé par `pip install pyspark` (dossier `bin/` du paquet, aussi en `.cmd` sous Windows) ;
+une distribution Spark classique (`spark-4.x-bin-hadoop3.tgz`) convient aussi.
+
+## Scala par défaut, Python en option
+
+Conformément au programme, les TP sont en **Scala** : énoncés `jourN/TPx_*.scala` (à compléter, les `???` sont typés),
+corrigés `jourN/corriges/*.scala`, à charger dans `spark-shell`. La version **Python** (notebooks Jupyter, mêmes
+étapes, mêmes résultats) est dans `jourN/python/` pour les participants qui le préfèrent : un groupe mixte est possible,
+les deux versions partagent les données, les scripts et les résultats attendus.
 
 Prérequis détaillés : [docs/prerequis.md](docs/prerequis.md). **Sous Windows, utilisez WSL2.**
 
@@ -33,26 +48,27 @@ Prérequis détaillés : [docs/prerequis.md](docs/prerequis.md). **Sous Windows,
 ```
 data/                      fil rouge : trips.csv (120 000 courses), trips.parquet, taxi_zone_lookup.csv
 jour1/                     Comprendre et utiliser Spark 4
-  TP1_premier_contact.ipynb        30 min   SparkSession, chargement, Spark UI
-  TP2_rdd_top10_zones.ipynb        30 min   RDD, PairRDD, reduceByKey, join, stages
+  TP1_premier_contact.scala        30 min   SparkSession, chargement, Spark UI
+  TP2_rdd_top10_zones.scala        30 min   RDD, PairRDD, reduceByKey, join, stages, SparkListener
   TP3_cluster/                     50 min   cluster Standalone (local ou Docker) + HDFS
-  TP4_spark_sql.ipynb              45 min   DataFrames, schéma, SQL, partitionBy, explain, ANSI
-  corriges/                        corrigés (notebooks + scripts .py exécutables)
+  TP4_spark_sql.scala              45 min   DataFrames, schéma, SQL, partitionBy, explain, ANSI, Dataset typé
+  corriges/                        corrigés Scala (:load dans spark-shell)
+  python/                          la même chose en Python : notebooks + corriges/ (.ipynb et .py)
 jour2/                     Machine Learning avec Spark ML
-  TP5_explorer.ipynb               35 min   visualiser avant de modéliser (Matplotlib, Seaborn)
-  TP6_regression.ipynb             30 min   Pipeline, régression linéaire vs arbre, RMSE / R², persistance
-  TP7_classification.ipynb         50 min   Random Forest vs SVM, matrice de confusion, ROC / AUC
-  TP8_clustering.ipynb             45 min   K-means + silhouette, bonus GraphFrames
-  corriges/                        corrigés (notebooks + scripts .py exécutables)
+  TP5_explorer.scala               35 min   visualiser avant de modéliser (Spark agrège, Plotly dessine)
+  TP6_regression.scala             30 min   Pipeline, régression linéaire vs arbre, RMSE / R², persistance
+  TP7_classification.scala         50 min   Random Forest vs SVM, matrice de confusion, ROC / AUC
+  TP8_clustering.scala             45 min   K-means + silhouette, bonus GraphFrames
+  corriges/, python/
 jour3/                     Spark Streaming et Spark à grande échelle
-  TP9_premier_stream.ipynb         35 min   Structured Streaming, jointure stream-statique, output modes
-  TP10_logs_temps_reel.ipynb       35 min   analyse de logs en temps réel : fenêtres, watermark, append
-  TP11_ml_streaming_catalyst.ipynb 55 min   modèle ML sur un flux, foreachBatch, Catalyst, Tungsten, AQE
-  corriges/                        corrigés (notebooks + scripts .py exécutables)
+  TP9_premier_stream.scala         35 min   Structured Streaming, jointure stream-statique, output modes
+  TP10_logs_temps_reel.scala       35 min   analyse de logs en temps réel : fenêtres, watermark, append
+  TP11_ml_streaming_catalyst.scala 55 min   modèle ML sur un flux, foreachBatch, Catalyst, Tungsten, AQE
+  corriges/, python/
 quiz/                      quiz des 3 jours (avec réponses) et correction de l'atelier Lambda / Kappa
 formateur/                 checklists des 3 jours, mode dégradé, mail de prérequis, publier sans les corrigés
-scripts/                   generate_data.py, download_official.py, stream_simulator.py, check_env.py, build_notebooks.py
-scala/                     corrigés Scala des TP 2, 4, 6, 7, 10 (spark-shell -i), testés : voir scala/README.md
+scripts/                   Viz.scala (graphiques Plotly depuis Scala), generate_data.py, download_official.py,
+                           stream_simulator.py, check_env.py, build_notebooks.py
 ```
 
 ## Les données
@@ -76,7 +92,13 @@ Pour utiliser les **données réelles** (un mois complet ≈ 3 millions de cours
 
 ## Versions
 
-Testé avec PySpark **4.2.0**, Java 21, Python 3.13. Fonctionne avec toute version 4.x de PySpark et Java 17+.
+Testé avec Spark **4.2.0** (Scala 2.13.18, `spark-shell` du paquet PySpark 4.2.0), Java 21, Python 3.13.
+Fonctionne avec toute version 4.x de Spark et Java 17+. Les corrigés Scala et Python donnent les mêmes résultats
+(à ±0,01 près sur les AUC : l'ordre des lignes après jointure, donc le tirage de `randomSplit`, diffère).
+
+Deux pièges propres à `spark-shell` : une `case class` déclarée dans un script chargé peut bloquer l'exécution
+(le TP 4 utilise un tuple typé ; dans un projet sbt, `.as[Course]` est la bonne pratique) ; les accents s'affichent
+« ? » si le terminal n'est pas en UTF-8 (Windows : `chcp 65001`).
 Pour le TP 3 en conteneurs, aligner la version de l'image `apache/spark` sur celle de `pip show pyspark`.
 
 ## Licence

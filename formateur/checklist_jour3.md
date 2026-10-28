@@ -31,4 +31,4 @@
 - Oublier le watermark avec une agrégation en append → « Append output mode not supported… without watermark ».
 - Format de date du log : `yyyy-MM-dd'T'HH:mm:ss.SSS` (le T entre apostrophes).
 - Lire un fichier pendant qu'il est écrit : le simulateur écrit puis déplace ; reproduire ce principe en production.
-- Plusieurs requêtes actives oubliées dans le notebook : `[q.stop() for q in spark.streams.active]`.
+- Plusieurs requêtes actives oubliées dans spark-shell : `spark.streams.active.foreach(_.stop())` (Python : `[q.stop() for q in spark.streams.active]`).

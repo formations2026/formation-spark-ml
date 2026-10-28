@@ -10,7 +10,7 @@
 ## J-1 – le mode dégradé (clé USB)
 - [ ] Wheel `pyspark-4.x.tar.gz` + `py4j` (`pip download pyspark -d usb/`)
 - [ ] Installateur JDK 17 Temurin (Windows .msi, macOS .pkg, Linux .tar.gz)
-- [ ] Installateurs VS Code + extensions Python / Jupyter (`.vsix`)
+- [ ] Installateurs VS Code + extensions Scala (Metals), Python / Jupyter (`.vsix`)
 - [ ] Le dépôt complet (zip), données incluses
 - [ ] Images Docker sauvegardées : `docker save apache/spark:<v>-python3 apache/hadoop:3.4.1 | gzip > usb/images.tar.gz`
 - [ ] Slides en PDF, corrigés en PDF
@@ -19,7 +19,8 @@
 ## Jour J – 8h45
 - [ ] Salle, projecteur, Yeti X (classe mixte), 2e écran
 - [ ] Terminal et VS Code en **fond blanc**, police 16+
-- [ ] Dépôt cloné et `check_env.py` ✔ sur le poste du formateur ; master Standalone testé (`start_cluster_local.sh`)
+- [ ] Dépôt cloné et `check_env.py` ✔ sur le poste du formateur ; `spark-shell` puis `:load jour1/corriges/tp1_premier_contact.scala` ; master Standalone testé (`start_cluster_local.sh`)
+- [ ] Terminal en UTF-8 (Windows : `chcp 65001`) pour les accents dans spark-shell
 - [ ] Slido / Kahoot prêt pour le quiz de 11h50 (questions dans `quiz/quiz_jour1.md`)
 - [ ] Tableau : une colonne « Attentes » (tour de table) à cocher en fin de journée
 

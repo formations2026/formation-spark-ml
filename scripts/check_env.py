@@ -4,7 +4,7 @@ Vérification du poste AVANT la formation (à envoyer aux participants avec le m
 
     python scripts/check_env.py
 
-Contrôle Java 17+, Python 3.10+, PySpark, Jupyter, Git, puis lance une vraie SparkSession.
+Contrôle Java 17+, Python 3.10+, PySpark, Jupyter, Git, spark-shell (Scala), puis lance une vraie SparkSession.
 """
 import re
 import shutil
@@ -60,6 +60,24 @@ try:
     check("Jupyter", True)
 except ImportError:
     check("Jupyter", False, "pip install jupyter (ou l'extension Jupyter de VS Code)")
+
+# spark-shell (les TP sont en Scala)
+try:
+    import pyspark, os, tempfile
+    binp = os.path.join(os.path.dirname(pyspark.__file__), "bin")
+    shell = os.path.join(binp, "spark-shell.cmd" if sys.platform == "win32" else "spark-shell")
+    check(f"spark-shell : {shell}", os.path.exists(shell), "réinstaller pyspark, ou installer une distribution Spark 4")
+    script = os.path.join(tempfile.mkdtemp(prefix="check_scala_"), "t.scala")
+    with open(script, "w") as f:
+        f.write('println("SCALA_OK " + spark.version + " " + scala.util.Properties.versionNumberString)\n')
+    env = dict(os.environ, JAVA_TOOL_OPTIONS="")
+    r = subprocess.run([shell, "--master", "local[1]", "--conf", "spark.ui.enabled=false", "-i", script],
+                       capture_output=True, text=True, timeout=240, stdin=subprocess.DEVNULL, env=env)
+    m = re.search(r"SCALA_OK (\S+) (\S+)", r.stdout)
+    check(f"spark-shell : Scala OK (Spark {m.group(1)}, Scala {m.group(2)})" if m else "spark-shell : Scala",
+          bool(m), "spark-shell ne démarre pas : vérifier JAVA_HOME ; sous Windows, préférer WSL2")
+except Exception as e:
+    check("spark-shell : Scala", False, f"{type(e).__name__} : {str(e)[:150]}")
 
 # Git
 check("Git : " + (shutil.which("git") or "introuvable"), shutil.which("git") is not None, "installer Git (git-scm.com)")

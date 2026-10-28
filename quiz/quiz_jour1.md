@@ -18,7 +18,7 @@ Ces questions préparent le QCM de validation des acquis du dernier jour.
 
 ## 2. Combien de stages pour ce job ?
 
-```python
+```scala
 rdd.map(f).filter(g).reduceByKey(h).map(k).count()
 ```
 

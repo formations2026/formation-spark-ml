@@ -11,7 +11,7 @@ nous préparerons un environnement de secours.
 | **Java (JDK)** | 17 ou 21 | `java -version` | [adoptium.net](https://adoptium.net) (Temurin). Définir `JAVA_HOME`. |
 | **Python** | 3.10 ou plus | `python --version` | [python.org](https://www.python.org/downloads/) – cocher « Add to PATH » sous Windows |
 | **Git** | récente | `git --version` | [git-scm.com](https://git-scm.com) |
-| **VS Code** | récente | – | [code.visualstudio.com](https://code.visualstudio.com) + extensions **Python** et **Jupyter** |
+| **VS Code** | récente | – | [code.visualstudio.com](https://code.visualstudio.com) + extension **Scala (Metals)** ; **Python** et **Jupyter** pour l'option Python |
 | **Docker Desktop** (TP 3 partie B, optionnel) | récente | `docker compose version` | [docker.com](https://www.docker.com/products/docker-desktop/) – 4 Go de RAM alloués |
 
 ### Vous êtes sous Windows ? Utilisez WSL2 (fortement recommandé)
@@ -28,15 +28,22 @@ Si vous restez en Windows natif : PowerShell peut refuser d'activer le venv →
 `Set-ExecutionPolicy RemoteSigned -Scope CurrentUser`. Si `java` n'est pas trouvé, définissez `JAVA_HOME`.
 `check_env.py` teste une vraie écriture Parquet : s'il échoue sur ce point, passez à WSL2 ou signalez-le-nous.
 
-## 2. Le dépôt et PySpark
+## 2. Le dépôt et Spark (spark-shell)
 
 ```bash
 git clone <URL_DU_DEPOT> formation-spark-ml
 cd formation-spark-ml
 python -m venv .venv
 source .venv/bin/activate          # Windows PowerShell : .venv\Scripts\Activate.ps1
-pip install -r requirements.txt    # pyspark 4.x, jupyter, pandas, pyarrow
+pip install -r requirements.txt    # pyspark 4.x (contient spark-shell), jupyter, pandas, pyarrow
+spark-shell --version              # Scala 2.13, Spark 4.x
 ```
+
+Les TP sont en **Scala**, dans `spark-shell` (le REPL Scala livré avec Spark) : aucun compilateur ni sbt à installer.
+`pip install pyspark` le fournit (`.venv/bin/spark-shell`, ou `.venv\Scripts\spark-shell.cmd` sous Windows).
+Vous préférez la distribution officielle ? Téléchargez `spark-4.x-bin-hadoop3.tgz` sur spark.apache.org, décompressez,
+ajoutez `bin/` au PATH : c'est équivalent. Python reste nécessaire pour les scripts utilitaires (simulateur de flux)
+et pour l'option Python des TP.
 
 ## 3. Vérification (1 minute)
 
@@ -44,7 +51,7 @@ pip install -r requirements.txt    # pyspark 4.x, jupyter, pandas, pyarrow
 python scripts/check_env.py
 ```
 
-Toutes les lignes doivent être ✔ et se terminer par « Tout est prêt pour la formation ! ».
+Toutes les lignes doivent être ✔ (dont « spark-shell : Scala OK ») et se terminer par « Tout est prêt pour la formation ! ».
 Envoyez-nous la sortie de cette commande si une ligne est ✘.
 
 ## 4. Configuration matérielle

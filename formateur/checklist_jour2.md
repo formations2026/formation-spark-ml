@@ -1,8 +1,9 @@
 # Checklist formateur – Jour 2 (Machine Learning)
 
 ## J-1
-- [ ] `pip install matplotlib seaborn` vérifié dans l'environnement des participants (dans requirements.txt)
-- [ ] `python jour2/corriges/tp6_regression.py` lancé sur votre poste : RMSE arbre ≈ 4,66 $ (les chiffres des slides)
+- [ ] Option Python : `pip install matplotlib seaborn` dans requirements.txt
+- [ ] `spark-shell -i jour2/corriges/tp6_regression.scala` lancé sur votre poste : RMSE arbre ≈ 4,67 $ (les chiffres des slides) ; `:load scripts/Viz.scala` + TP 5 : 4 fichiers HTML dans out/tp5/
+- [ ] GraphFrames Scala : `spark-shell --packages io.graphframes:graphframes-spark4_2.13:<version>` testé ; sinon démo en mode dégradé
 - [ ] GraphFrames testé : `pip install graphframes-py` + JAR `io.graphframes:graphframes-spark4_2.13` ; sinon prévoir la démo en mode dégradé (`groupBy`)
 - [ ] Slido / Kahoot : quiz flash (4 questions) et activité « quel type de problème ? » préparés (`quiz/quiz_jour2.md`)
 - [ ] Corrigés du jour 1 poussés sur le dépôt ; notions « floues » d'hier relues
@@ -16,7 +17,7 @@
 | 10h30 | Pause | |
 | 10h45 | Partie 2 : briques, pipeline, arbre, code en direct | Exécuter le code cellule par cellule |
 | 11h10 | **TP 6** (30 min) + partage | Réussi si RMSE arbre < 5 $. Bonus « tricher » = introduction à la fuite |
-| 11h50 | Persistance, PySpark et R | SparkR déprécié : orienter vers sparklyr |
+| 11h50 | Persistance, Python et R | SparkR déprécié : orienter vers sparklyr |
 | 12h00 | **Émargement**, déjeuner | |
 | 13h00 | Partie 3 : RF vs SVM (schémas), matrice, ROC, quiz flash, fuite | Faire calculer la précision à la main |
 | 13h45 | **TP 7** (50 min) + partage | Réussi si AUC > 0,65 + ROC. Classes équilibrées (52 %) |
