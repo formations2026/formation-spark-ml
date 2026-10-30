@@ -69,7 +69,15 @@ quiz/                      quiz des 3 jours (avec réponses) et correction de l'
 formateur/                 checklists des 3 jours, mode dégradé, mail de prérequis, publier sans les corrigés
 scripts/                   Viz.scala (graphiques Plotly depuis Scala), generate_data.py, download_official.py,
                            stream_simulator.py, check_env.py, build_notebooks.py
+complement-scala/          module « Scala de A à Z » (2 jours, 90 slides) : TP A1–A3, B1 + corrigés, mémo
+scala-app/                 l'application Spark du fil rouge : projet sbt, tests ScalaTest, spark-submit (TP B2, B3)
 ```
+
+## Complément « Scala de A à Z »
+
+Pour les groupes qui découvrent Scala, un module de 2 jours précède la formation : du premier `val` à une application
+Spark compilée qui traite un flux. Support `Formation01-SparkML_Complement-Scala-A-Z.pptx`, TP dans `complement-scala/`
+et `scala-app/`.
 
 ## Les données
 
