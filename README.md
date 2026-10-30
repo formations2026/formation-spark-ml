@@ -1,5 +1,9 @@
 # Formation Spark 4 & Machine Learning – dépôt des travaux pratiques
 
+> **Branches** : `main` = `scala` (TP en **Scala**, langage par défaut du programme, + complément « Scala de A à Z ») ·
+> [`pyspark`](../../tree/pyspark) (les mêmes TP en **Python**, notebooks Jupyter) ·
+> [`participants`](../../tree/participants) (énoncés seuls).
+
 Support des TP de la formation **Spark 4 & Machine Learning** (3 jours, Ambient IT).
 Un seul projet **fil rouge** sur les 3 jours : les courses de taxis jaunes de New York.
 
