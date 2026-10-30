@@ -1,5 +1,9 @@
 # Formation Spark 4 & Machine Learning – dépôt des travaux pratiques
 
+> **Branche `pyspark`** : les TP en **Python (PySpark)**, notebooks Jupyter.
+> La version **Scala** (par défaut dans le programme) est sur la branche [`scala`](../../tree/scala) (= `main`),
+> avec le complément « Scala de A à Z ». Mêmes données, mêmes TP, mêmes résultats.
+
 Support des TP de la formation **Spark 4 & Machine Learning** (3 jours, Ambient IT).
 Un seul projet **fil rouge** sur les 3 jours : les courses de taxis jaunes de New York.
 
