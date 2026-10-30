@@ -1,7 +1,7 @@
 // TP 3 – Le TP 2 sur un cluster Standalone, données lues depuis HDFS (ou en local)
 //
 //   spark-shell --master spark://127.0.0.1:7077 -i jour1/TP3_cluster/tp2_cluster.scala
-//   DATA=hdfs://localhost:9000/data spark-shell --master spark://localhost:7077 -i jour1/TP3_cluster/tp2_cluster.scala
+//   DATA=hdfs://namenode:8020/data spark-shell --master spark://spark-master:7077 -i jour1/TP3_cluster/tp2_cluster.scala
 //
 // Le code métier est IDENTIQUE au TP 2 : seuls --master et le chemin des données changent.
 val base = sys.env.getOrElse("DATA", "data")
