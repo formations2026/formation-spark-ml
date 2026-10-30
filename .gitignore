@@ -12,3 +12,9 @@ jour1/TP3_cluster/.env
 data/_yellow_full.parquet
 .DS_Store
 stream/
+
+# Branche participants : corrigés, quiz et documents formateur non publiés
+jour*/corriges/
+jour*/python/corriges/
+quiz/
+formateur/
